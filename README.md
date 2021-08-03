@@ -12,22 +12,27 @@ A confusing piece of code takes more time than necessary to understand it. Every
 ## Scout Essentials
 This simplified scenario is designed to test if you subscribe to this ideology. We want to see how you operate. 
 
-We're looking at a Scout Essentials cart page. We want to see how It uses React, but its code isn't clean.
+We're looking at a Scout Essentials cart page. It uses React, but the code isn't clean.
 
 ## Your Task
-You will implement two features. We expect that you improve the readability and maintainability of the codebase when you're done. Do whatever you would in real life. Don't hesitate. Take action.
+You need to implement three features sequentially. We expect that you improve the readability and maintainability of the codebase when you're done. Do whatever you would in real life. Don't hesitate. Take action.
 
 
 ### Feature #1
 Group the items in the cart.
 
 If you click 'Add to Cart' 3 times, it will look like this:
+
+```
 Trail Mix
 Trail Mix
 Trail Mix
+```
 
 Make it look like this:
+```
 Trail Mix x 3
+```
 
 ### Feature #2
 Add discount code support.
@@ -44,7 +49,12 @@ Discounts and promo codes cannot be combined.
 If you can get all the features in - great. If not - don't worry, we're not a sweat shop. We are a customer obsessed software company.
 
 
+
 ---
+---
+---
+
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
