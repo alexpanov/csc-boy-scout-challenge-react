@@ -38,13 +38,15 @@ function stateReducer(state, action) {
     case "RECEIVE_PRODUCTS":
       return { ...state, loading: false, products: action.products };
     case "ADD_ITEM_TO_CART":
+      console.log(state.items
+        .concat( action.item));
       const updatedItems = state.items
         .concat( action.item)
         .reduce((items, product) => {
         if (items[product.title]) {
-          items[product.title].qty += 1;
+          items[product.title].qty += product.qty ?? 1;
         } else {
-          items[product.title] = { ...product, qty: 1 };
+          items[product.title] = { ...product, qty: product.qty ?? 1 };
         }
         return items;
       }, {});
@@ -81,30 +83,25 @@ function App() {
       <header className="main-header">
         <h1>Scout Essentials</h1>
       </header>
-      <div>
+      <div>---
         <h1>Product List</h1>
         <div className="product-list">
-          {products.map((x) => {
+          {products.map(({ title, imageUrl, price }) => {
             return (
               <div className="product">
-                <p>{x.title}</p>
-                <p>${x.price}</p>
+                <p>{title}</p>
+                <p>${price}</p>
                 <div>
                   <img
                     className="product-image"
-                    src={x.imageUrl}
-                    alt={x.title}
+                    src={imageUrl}
+                    alt={title}
                   />
                 </div>
                 <button
                   className="btn"
                   onClick={() => {
-                    console.log("add", x);
-                    const item = {
-                      title: x.title,
-                      price: x.price,
-                    };
-                    dispatch({ type: "ADD_ITEM_TO_CART", item });
+                    dispatch({ type: "ADD_ITEM_TO_CART", item: { title, price } });
                   }}
                 >
                   Add to Cart
@@ -117,8 +114,8 @@ function App() {
       <div className="cart">
         <h3>Your Cart</h3>
         <p>Items in cart: {items.length}</p>
-        {items.map(({ title }) => {
-          return <div>{title}</div>;
+        {items.map(({ title, qty }) => {
+          return <div>{title} x {qty}</div>;
         })}
         <p>
           Total price: $
