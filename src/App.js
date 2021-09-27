@@ -38,8 +38,6 @@ function stateReducer(state, action) {
     case "RECEIVE_PRODUCTS":
       return { ...state, loading: false, products: action.products };
     case "ADD_ITEM_TO_CART":
-      console.log(state.items
-        .concat( action.item));
       const updatedItems = state.items
         .concat( action.item)
         .reduce((items, product) => {
@@ -72,9 +70,6 @@ function App() {
       dispatch({ products, type: "RECEIVE_PRODUCTS" });
     });
   }, []);
-
-  console.log("state", { loading, products, items });
-
   if (loading) {
     return <div>'Loading...'</div>;
   }
