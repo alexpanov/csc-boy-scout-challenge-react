@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './App.css';
+import { findDuplicates, timesToAppear } from './utils';
 
 let products = [
   {
@@ -34,6 +35,7 @@ class App extends React.Component {
     items: [],
     products: undefined,
     l: true,
+    code: ''
   }
 
   componentDidMount() {
@@ -45,9 +47,39 @@ class App extends React.Component {
     });
   }
 
-  render() {
-    console.log('this.state', this.state);
+  handleClick = (finalObj, totalPrice) => {
+    let total = totalPrice;
+    if (this.state.code === 'CLEANCODE10') {
+      total = totalPrice * 0.9;
+    } else if (this.state.code === 'ENERGY15') {
+      total = 0;
+      Object.entries(finalObj).forEach(([title, { count, price }]) => {
+        total += title === 'Trail Mix' ? price * count * 0.85 : price * count;
+      });
+    } else if (this.state.code === 'DRY20') {
+      total = 0;
+      Object.entries(finalObj).forEach(([title, { count, price }]) => {
+        total += title === 'Rain Gear' ? price * count * 0.8 : price * count;
+      });
+    }
+    alert(`You would pay ${total.toFixed(2)}`);
+  }
 
+  render() {
+    let finalObj = {};
+    this.state.items.forEach((item) => {
+      if (finalObj[item.title]) {
+        finalObj[item.title].count += 1;
+      } else {
+        finalObj[item.title] = {count: 1, price: item.price };
+      }
+    });
+
+    const totalPrice = this.state.items.reduce((prevValue, currValue) => {
+      return prevValue + currValue.price
+    }, 0);
+
+    console.log('finalObj: ', finalObj);
     if (!this.state.l) {
       return (
         <div className="main">
@@ -88,16 +120,17 @@ class App extends React.Component {
           <div className="cart">
             <h3>Your Cart</h3>
             <p>Items in cart: {this.state.items.length}</p>
-            {this.state.items.map(x => {
+            {Object.entries(finalObj).map(([title, { count }], index) => {
               return (
-                <div>
-                  {x.title}
+                <div key={`product-${index}`}>
+                  {`${title} x ${count}`}
                 </div>
               )
             })}
-            <p>Total price: ${this.state.items.reduce((prevValue, currValue) => {
-              return prevValue + currValue.price
-            }, 0)}</p>
+            <p>Total price: ${totalPrice}</p>
+
+            <label>code</label>
+            <input value={this.state.code} onChange={(e) => this.setState({ code: e.target.value })} />
             <div className="buttons">
               <button
                 className="btn"
@@ -108,7 +141,7 @@ class App extends React.Component {
               </button>
               <button
                 className="btn"
-                onClick={() => alert('Not there yet')}
+                onClick={() => this.handleClick(finalObj, totalPrice)}
               >
                 Checkout
               </button>
