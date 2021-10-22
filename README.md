@@ -15,11 +15,10 @@ This simplified scenario is designed to test if you subscribe to this ideology. 
 We're looking at a Scout Essentials cart page. It uses React, but the code isn't clean.
 
 ## Your Task
-You need to implement three features sequentially. We expect that you improve the readability and maintainability of the codebase when you're done. Do whatever you would in real life. Don't hesitate. Take action.
+You need to implement one new feature. We expect that you improve the readability and maintainability of the codebase when you're done. Do whatever you would in real life. Don't hesitate. Take action.
 
 
-### Feature #1
-Group the items in the cart.
+### Group the items in the cart.
 
 If you click 'Add to Cart' 3 times, it will look like this:
 
@@ -33,21 +32,6 @@ Make it look like this:
 ```
 Trail Mix x 3
 ```
-
-### Feature #2
-Add discount code support.
-Whenever someone enters "CLEANCODE10", we give them a pat on the back and a 10% discount.
-
-### Feature #3
-Add promo code support per item:
-ENERGY15 gives a 15% discount on Trail Mixes.
-DRY20 gives a 20% discount on Rain Gear.
-Discounts and promo codes cannot be combined.
-
-
-## Finally
-If you can get all the features in - great. If not - don't worry, we're not a sweat shop. We are a customer obsessed software company.
-
 
 
 ---
